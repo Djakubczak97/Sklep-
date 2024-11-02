@@ -234,7 +234,7 @@
                 <div class="col-md-6">
                     <!-- Payment form -->
                     <h3>Płatność</h3>
-                    <form>
+                    <form id="paymentForm" onsubmit="return validatePaymentForm()">
                         <div class="form-group">
                             <label for="cardOwner">Właściciel karty</label>
                             <input type="text" class="form-control" id="cardOwner" placeholder="Właściciel karty">
@@ -288,6 +288,37 @@
 
             alert("Koszyk wyczyszczony!");
         }
+    </script>
+    <script>
+      function validatePaymentForm() {
+    const cardOwner = document.getElementById('cardOwner').value.trim();
+    const cardNumber = document.getElementById('cardNumber').value.trim();
+    const expirationDate = document.getElementById('expirationDate').value.trim();
+    const cvv = document.getElementById('cvv').value.trim();
+    
+    // Sprawdzenie formularza adresowego
+    const inputName = document.getElementById('inputName').value.trim();
+    const inputSurname = document.getElementById('inputSurname').value.trim();
+    const inputEmail = document.getElementById('inputEmail').value.trim();
+    const inputPhoneNumber = document.getElementById('inputPhoneNumber').value.trim();
+    const inputAddress = document.getElementById('inputAddress').value.trim();
+    const inputCity = document.getElementById('inputCity').value.trim();
+    const inputCountry = document.getElementById('inputCountry').value;
+    const inputZip = document.getElementById('inputZip').value.trim();
+    
+    // Sprawdzenie, czy wszystkie pola są wypełnione
+    if (!cardOwner || !cardNumber || !expirationDate || !cvv ||
+        !inputName || !inputSurname || !inputEmail || 
+        !inputPhoneNumber || !inputAddress || 
+        !inputCity || !inputCountry || !inputZip) {
+        
+        alert("Proszę wypełnić wszystkie pola!");
+        return false; // Zatrzymaj przesyłanie formularza
+    }
+    
+    // Jeśli wszystko jest wypełnione, zezwól na wysłanie formularza
+    return true;
+}
     </script>
 
 <footer class="text-body-secondary py-5">
